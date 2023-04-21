@@ -13,8 +13,8 @@ on:
   push:
     branches: 
       - master
-  # schedule:
-  #   - cron: 0 20 * * *
+  schedule:
+      - cron: 0 20 * * *
   release:
     types: [published]
 
@@ -73,9 +73,10 @@ jobs:
           # 例如:
 
           cat >> .config <<EOF
-          CONFIG_TARGET_IMAGES_GZIP=y
-          CONFIG_KERNEL_BUILD_USER="OpenWrt-CI"
-          CONFIG_KERNEL_BUILD_DOMAIN="Azure"
+          CONFIG_TARGET_meson=y
+          CONFIG_TARGET_meson_meson8b=y
+          CONFIG_TARGET_meson_meson8b_DEVICE_thunder-onecloud=y
+          CONFIG_TARGET_ROOTFS_PARTSIZE=256
           EOF
 
           #
