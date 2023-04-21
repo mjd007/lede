@@ -52,15 +52,24 @@ jobs:
         run: |
           rm -f ./.config*
           touch ./.config
-        #
-        # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
-        # 例如:
-        cat >> .config <<EOF
-        CONFIG_TARGET_meson=y
-        CONFIG_TARGET_meson_meson8b=y
-        CONFIG_TARGET_meson_meson8b_DEVICE_thunder-onecloud=y
-        CONFIG_TARGET_ROOTFS_PARTSIZE=256
-        EOF
+          
+          #
+          # 在 cat >> .config <<EOF 到 EOF 之间粘贴你的编译配置, 需注意缩进关系
+          # 例如:
+        
+          cat >> .config <<EOF
+          CONFIG_TARGET_meson=y
+          CONFIG_TARGET_meson_meson8b=y
+          CONFIG_TARGET_meson_meson8b_DEVICE_thunder-onecloud=y
+          CONFIG_TARGET_ROOTFS_PARTSIZE=256
+          EOF
+
+          #
+          # ===============================================================
+          # 
+          
+          sed -i 's/^[ \t]*//g' ./.config
+          make defconfig          
 
       - name: Download packages
         run: make download -j16
